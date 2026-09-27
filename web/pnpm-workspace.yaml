@@ -1,0 +1,5 @@
+allowBuilds:
+  esbuild: set this to true or false
+# pnpm 10 起默认不执行依赖的安装脚本，这里显式允许 esbuild 安装它的二进制文件
+onlyBuiltDependencies:
+  - esbuild
