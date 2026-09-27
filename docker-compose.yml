@@ -1,0 +1,27 @@
+services:
+  api:
+    build: ./server
+    container_name: iap-api
+    environment:
+      IAP_AGENT_TOKEN: ${IAP_AGENT_TOKEN:-dev-agent-token}
+      IAP_DATA_DIR: /data
+      IAP_DATABASE_URL: sqlite:////data/iap.db
+      IAP_OFFLINE_AFTER_MINUTES: "1440"
+      IAP_CORS_ORIGINS: "http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080"
+    volumes:
+      - iap-data:/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  web:
+    build: ./web
+    container_name: iap-web
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+volumes:
+  iap-data:
