@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "description": "告警阈值规则。改完保存即生效，服务端按文件修改时间自动重新加载。",
+  "rules": [
+    {
+      "id": "cpu_load_high",
+      "metric": "cpu.load_percent",
+      "op": ">=",
+      "value": 85,
+      "level": "warning",
+      "description": "处理器负载偏高",
+      "message": "处理器负载 {value:.0f}%，检查一下是否有程序占用过高"
+    },
+    {
+      "id": "memory_used_high",
+      "metric": "memory.used_percent",
+      "op": ">=",
+      "value": 85,
+      "level": "warning",
+      "description": "内存使用率偏高",
+      "message": "内存使用率 {value:.1f}%，建议关闭不用的程序或考虑加内存"
+    },
+    {
+      "id": "disk_used_high",
+      "metric": "disk.used_percent",
+      "op": ">=",
+      "value": 85,
+      "level": "warning",
+      "description": "分区使用率偏高",
+      "message": "{dimension} 盘已用 {value:.1f}%，清理一下临时文件和不用的软件"
+    },
+    {
+      "id": "disk_free_low",
+      "metric": "disk.free_gb",
+      "op": "<",
+      "value": 20,
+      "level": "notice",
+      "description": "分区可用空间不足",
+      "message": "{dimension} 盘仅剩 {value:.1f} GB，低于 20 GB"
+    },
+    {
+      "id": "system_uptime_long",
+      "metric": "system.uptime_days",
+      "op": ">",
+      "value": 30,
+      "level": "notice",
+      "description": "长期未重启",
+      "message": "已连续运行 {value:.0f} 天，建议安排一次重启"
+    },
+    {
+      "id": "pending_reboot",
+      "metric": "system.pending_reboot",
+      "op": ">",
+      "value": 0,
+      "level": "notice",
+      "description": "存在待重启生效的更新",
+      "message": "系统有待重启生效的更新"
+    },
+    {
+      "id": "firewall_disabled",
+      "metric": "security.firewall_disabled_profiles",
+      "op": ">",
+      "value": 0,
+      "level": "critical",
+      "description": "防火墙未全部开启",
+      "message": "有 {value:.0f} 个防火墙配置文件未开启"
+    },
+    {
+      "id": "defender_realtime_off",
+      "metric": "security.defender_realtime_off",
+      "op": ">",
+      "value": 0,
+      "level": "critical",
+      "description": "病毒防护实时保护未开启",
+      "message": "Windows 病毒防护的实时保护没有开启"
+    },
+    {
+      "id": "defender_signature_stale",
+      "metric": "security.defender_signature_age_days",
+      "op": ">=",
+      "value": 7,
+      "level": "notice",
+      "description": "病毒库长期未更新",
+      "message": "病毒库已经 {value:.0f} 天没有更新"
+    },
+    {
+      "id": "no_ssd",
+      "metric": "hardware.ssd_count",
+      "op": "<=",
+      "value": 0,
+      "level": "info",
+      "description": "未检测到固态硬盘",
+      "message": "没有检测到固态硬盘，换成 SSD 能明显加快开机和软件启动"
+    }
+  ]
+}
