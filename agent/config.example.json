@@ -1,0 +1,6 @@
+{
+  "server_url": "http://10.0.0.5:8000",
+  "token": "把这里换成服务端配置的 IAP_AGENT_TOKEN",
+  "queue_dir": "",
+  "timeout_sec": 20
+}
